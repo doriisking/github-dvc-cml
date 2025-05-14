@@ -1,0 +1,22 @@
+stages:
+  process:
+    cmd: python process_data.py
+    deps:
+    - process_data.py 
+    #사용 파일
+    - data_raw.csv
+    #사용 데이터
+    outs:
+    - data_processed.csv
+    #출력 데이터
+    
+  train:
+    cmd: python train.py
+    deps:
+    - train.py
+    - data_processed.csv
+    outs:
+    - by_region.png
+    metrics:
+    - metrics.json:
+        cache: false
